@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La leyenda del ceibo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1b875;
+            position: relative;
+            overflow-x: hidden; /* Evita el scroll lateral */
+        }
+
+    header {
+    background-image: url(archivos/Guardas.png); /* Cambia la ruta a tu imagen */
+    background-size: cover; /* Asegura que la imagen cubra todo el header */
+    background-position: center; /* Centra la imagen */
+    color: #000000; /* Color del texto */
+    padding: 50px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+@font-face {
+    font-family: 'Ñee';
+    src: url(archivos/nee.ttf) format('truetype'); /* Cambia la ruta a tu archivo */
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    font-family: 'Ñee', Arial, sans-serif; /* Cambia la fuente del cuerpo */
+}
+
+header, footer {
+    font-family: 'Ñee', Arial, sans-serif; /* Cambia la fuente en el header y el footer */
+}
+
+footer {
+    background-image: url(archivos/Guardas.png); /* Cambia la ruta a tu imagen */
+    background-size: cover; /* Asegura que la imagen cubra todo el footer */
+    background-position: center; /* Centra la imagen */
+    color: #000000; /* Color del texto */
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    z-index: 1;
+}
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #000000;
+            text-decoration: none;
+        }
+
+        .container {
+            width: 90%; /* Aumentar a 90% para pantallas pequeñas */
+            max-width: 800px; /* Limitar el ancho máximo */
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+    /* Estilo para el carrusel */
+    .carousel-container {
+    position: relative;
+    width: 100%; /* Ancho completo para adaptarse */
+    max-width: 500px; /* Ancho máximo del carrusel */
+    height: 250px; /* Altura fija del carrusel */
+    overflow: hidden;
+    margin: 0 auto; /* Centrar el carrusel */
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%; /* Ajustar a 100% del contenedor */
+}
+
+.carousel img {
+    min-width: 100%; /* Asegura que solo una imagen esté visible a la vez */
+    max-height: 250px; /* Altura máxima */
+    object-fit: cover; /* Mantener la proporción de la imagen */
+    display: none; /* Esconder todas las imágenes inicialmente */
+}
+
+.carousel img.active {
+    display: block; /* Solo muestra la imagen activa */
+}
+
+        /* descripción */
+        .description-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f1b875;
+            
+        }
+
+        .description-container h3 {
+            margin-bottom: 10px;
+            font-size: 24px;
+            color: #8e5913;
+        }
+
+        .description-container p {
+            font-size: 16px;
+            color: #333;
+        }
+
+
+        .product {
+            background-color: #8e5913;
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #000000;
+            position: relative;
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .product-images {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .product-images img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        footer {
+            background-color: #155f1d;
+            color: #000000;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Botones del carrusel */
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        /* Estilo del botón de la solapa */
+        .tab-button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        /* Contenido de la solapa (inicialmente oculto) */
+        .tab-content {
+            display: none;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+        }
+
+        .tab-content a {
+            display: block;
+            margin: 10px 0;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .tab-content a:hover {
+            text-decoration: underline;
+        }
+        
+    
+
+        /* Nueva sección de detalles del producto */
+        .product-detail {
+            display: none;
+            background-color: #ee5a34;
+            padding: 20px;
+            border: 1px solid #ffec7b;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-detail img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .back-button {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .buy-button {
+    background-color: #333; /* Color grisáceo */
+    color: white;
+    padding: 10px 20px; /* Ajusta el espacio interno del botón */
+    border: none; /* Sin bordes */
+    cursor: pointer;
+    width: 150px; /* Ancho fijo */
+    text-align: center;
+    font-size: 16px;
+    margin-top: 10px;
+    border-radius: 0; /* Elimina los bordes redondeados para hacerlo cuadrado */
+}
+
+        /* Animación de las flores cayendo desde arriba */
+        .flower {
+            position: absolute;
+            top: -100px; /* Inicia desde fuera de la pantalla */
+            width: 50px;
+            height: 50px;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg); /* Caen hasta fuera de la pantalla */
+            }
+        }
+
+        /* Diferentes velocidades para las flores */
+        .flower:nth-child(1) { left: 10%; animation-duration: 10s; }
+        .flower:nth-child(2) { left: 20%; animation-duration: 12s; }
+        .flower:nth-child(3) { left: 30%; animation-duration: 14s; }
+        .flower:nth-child(4) { left: 40%; animation-duration: 11s; }
+        .flower:nth-child(5) { left: 50%; animation-duration: 9s; }
+        .flower:nth-child(6) { left: 60%; animation-duration: 15s; }
+        .flower:nth-child(7) { left: 70%; animation-duration: 8s; }
+        .flower:nth-child(8) { left: 80%; animation-duration: 13s; }
+        .flower:nth-child(9) { left: 90%; animation-duration: 10s; }
+
+        /* Estilo para el contenido del contacto */
+        .contact-info {
+            display: none; /* Oculto inicialmente */
+        }
+
+        @media (max-width: 600px) {
+            /* Estilo responsivo */
+            nav ul li {
+                display: block; /* Muestra los elementos en bloque */
+                margin: 5px 0; /* Margen vertical */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Flores de ceibo cayendo desde arriba -->
+<img src="archivos/hoja.jpg"   class="flower">
+<img src="archivos/hoja2.jpg"  class="flower">
+<img src="archivos/hoja3.jpg"  class="flower">
+<img src="archivos/hoja4.jpg"  class="flower">
+<img src="archivos/hoja.jpg"   class="flower">
+<img src="archivos/hoja2.jpg"  class="flower">
+<img src="archivos/hoja3.jpg"  class="flower">
+<img src="archivos/hoja4.jpg"  class="flower">
+<img src="archivos/hoja.jpg"   class="flower">
+
+<!-- Música de fondo -->
+<audio autoplay loop>
+    <source src="ruta-de-tu-cancion.mp3" type="audio/mpeg">
+    
+</audio>
+
+<header>
+    <h1>Bienvenidos a La leyenda del ceibo</h1>
+    <nav>
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Productos</a></li>
+            <li><a href="#" onclick="toggleTab()">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Carrusel de imágenes -->
+<div class="carousel-container"> 
+    <div class="carousel" id="carousel" > 
+        <img src="archivos/Titulo.png" alt="Imagen 1" class="active"> 
+        <img src="archivos/logo.jpg" alt="Imagen 3" class="active">
+    </div>
+    <button class="carousel-button prev" onclick="moveCarousel(-1)">&#10094;</button>
+    <button class="carousel-button next" onclick="moveCarousel(1)">&#10095;</button>
+</div>
+
+ <!-- Nueva sección de título y descripción -->
+ <div class="description-container">
+    <h3>Descripción</h3>
+    <p>La Leyenda del ceibo, es un juego de rol y suspenso el cual se debe de jugar con un mínimo de 6 y un máximo de 11 participantes. La caja del juego dentro contiene un reloj de arena y una flecha a modo de ruleta.  El desempeño de los jugadores con sus roles influenciara mucho la partida para poder encontrar al invasor, cada roll se dará de forma secreta y aleatoria, estopara que nunca se sepan las identidades.</p>
+</div>
+
+<div class="container">
+    <h2>Nuestros Productos</h2>
+
+    <!-- Producto 1 -->
+    <div class="product" onclick="showProductDetail(1)">
+        <div>
+            <h3>Producto 1</h3>
+            <p>el juego de la leyenda del ceibo.</p>
+            <p><strong>Precio: $100.000</strong></p>
+            
+            <!-- Imágenes adicionales del producto -->
+            <div class="product-images">
+                <img src="archivos/juego.jpg" alt="Producto 1 - Foto 1">
+                <img src="archivos/juego abierto.jpg" alt="Producto 1 - Foto 2">
+                <img src="archivos/Reloj de arena.jpg" alt="Producto 1 - Foto 3">
+                <img src="archivos/cartas.jpg" alt="Producto 1 - Foto 4">
+            </div>
+        </div>
+    </div>
+
+    <!-- Producto 2 -->
+    <div class="product" onclick="showProductDetail(2)">
+        <div>
+            <h3>Producto 2</h3>
+            <p>El indumento de la leyenda del ceibo.</p>
+            <p><strong>Precio: $20.000</strong></p>
+
+            <!-- Imágenes adicionales del producto -->
+            <div class="product-images">
+                <img src="archivos/indu1.jpg" alt="Producto 2 - Foto 1">
+                <img src="archivos/indu2.jpg" alt="Producto 2 - Foto 2">
+                <img src="archivos/indu3.jpg" alt="Producto 2 - Foto 3">
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de contacto -->
+    <div class="contact-info" id="contactInfo">
+        <h2>Contacto</h2>
+        <p><strong>Instagram:</strong> <a href="https://www.instagram.com/la_leyenda_del_ceibo/?utm_source=ig_web_button_share_sheet" target="_blank">@la_leyenda_del_ceibo</a></p>
+        <p><strong>Teléfono:</strong> <a href="tel:+123456789">+54 1131725023</a></p>
+        <p><strong>Email:</strong> <a href="laleyendadelceibo@gmail.com">laleyendadelceibo@gmail.com</a></p>
+    </div>
+
+</div>
+
+<!-- Sección de detalles del producto -->
+<div class="product-detail" id="productDetail">
+    <button class="back-button" onclick="hideProductDetail()">Volver</button>
+    <h2 id="detailTitle">Título del Producto</h2>
+    <img id="detailImage" src="" alt="Imagen del Producto">
+    <p id="detailDescription">Descripción detallada del producto.</p> 
+    <p><strong id="detailPrice">Precio: $</strong></p>
+    
+    <!-- Botón con enlace que se ajusta según el producto -->
+    <a id="buyLink" href="" target="_blank">
+        <button class="buy-button">Comprar</button>
+    </a>
+</div>
+
+<footer>
+    <p>&copy; 28/10/2024 Taller de diseño II Derechos reservados a: </p>
+    <p>Cristi Agustina</p>
+    <p>Sotelo Juarez Maira</p>
+    <p>Castellano Santiago</p>
+    <p>Choque Thiago</p>
+    <p>Chamorro Lucas</p>
+    <p>Grupo: N°19</p>
+    <p>Profeosras:</p>
+    <p>Frega Laura</p>
+    <p>Gruiser Julieta</p>
+
+</footer>
+
+<script>
+    // Funcionalidad del carrusel
+    let currentSlide = 0;
+    const carousel = document.getElementById('carousel');
+    const totalSlides = carousel.children.length;
+
+    function moveCarousel(direction) {
+        currentSlide += direction;
+        if (currentSlide < 0) {
+            currentSlide = totalSlides - 1;
+        } else if (currentSlide >= totalSlides) {
+            currentSlide = 0;
+        }
+        carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    // Funcionalidad de la solapa de contacto
+    function toggleTab() {
+        const tabContent = document.getElementById('contactInfo');
+        if (tabContent.style.display === 'block') {
+            tabContent.style.display = 'none';
+        } else {
+            tabContent.style.display = 'block';
+        }
+    }
+
+    // Funcionalidad para mostrar detalles del producto
+    const productDetail = document.getElementById('productDetail');
+    const detailTitle = document.getElementById('detailTitle');
+    const detailImage = document.getElementById('detailImage');
+    const detailDescription = document.getElementById('detailDescription');
+    const detailPrice = document.getElementById('detailPrice');
+    const buyLink = document.getElementById('buyLink');
+
+    function showProductDetail(productId) {
+        let productData = {};
+
+        if (productId === 1) {
+            productData = {
+                title: 'Producto 1',
+                image: 'archivos/juego.jpg',
+                description: 'Contiene: 1 tablero/caja. 1 Reloj de arena. 1 Flecha. 11 Cartas. Medidas:Tablero/caja: El tablero de madera que cuenta con unas dimensiones de de 25cm x 25cm y un ancho de 4,5cm con la caja cerrada. Con la solapas de la caja abierta mide 50cm x 25cm. Reloj de arena: Este reloj cuenta con unas dimensiones 14,5cm de largo y su anchura es de 4cm x 3cm. Para mejor terminació se barnizo. Flecha:Esta flecha cuenta con unas dimensiones de 8,5cm de largo y 3,5cm de ancho. Cartas: Estas cartas cuentan con unas dimensiones de 8,5cm x 6cm.',
+                price: '$100.000',
+                link: 'https://articulo.mercadolibre.com.ar/MLA-1456695529-juego-de-mesa-la-leyenda-del-ceibo-_JM#reco_item_pos=3&reco_backend=item_decorator&reco_backend_type=function&reco_client=home_items-decorator-legacy&reco_id=4a929271-2481-442a-b8e2-51ac29e1468c&reco_model=&c_id=/home/navigation-recommendations-seed/element&c_uid=ebde6792-2699-4d1d-9445-5fc5ec564c33&da_id=navigation&da_position=3&id_origin=/home/dynamic_access&da_sort_algorithm=ranker' // Enlace de compra para Producto 1
+            };
+        } else if (productId === 2) {
+            productData = {
+                title: 'Producto 2',
+                image: 'archivos/indu1.jpg',
+                description: 'El indumento mostrado es una envolvente que tiene un anclaje en hombros y cuello, que toma forma de fuego, y contiene las ramas con las flores del ceibo.',
+                price: '$20.000',
+                link: 'https://articulo.mercadolibre.com.ar/MLA-1943826402-indumento-de-la-leyenda-del-ceibo-_JM#reco_item_pos=1&reco_backend=item_decorator&reco_backend_type=function&reco_client=home_items-decorator-legacy&reco_id=f93cbf47-5138-4c60-a34a-de4e0bc06741&reco_model=&c_id=/home/second-best-navigation-trend-recommendations/element&c_uid=976daa5d-cd6c-4de1-bd59-7ae684ac6920&da_id=second_best_navigation_trend&da_position=1&id_origin=/home/dynamic_access&da_sort_algorithm=ranker' // Enlace de compra para Producto 2
+            };
+        }
+
+        // Asignar los valores del producto a los elementos correspondientes
+        detailTitle.innerText = productData.title;
+        detailImage.src = productData.image;
+        detailDescription.innerText = productData.description;
+        detailPrice.innerText = `Precio: ${productData.price}`;
+        buyLink.href = productData.link; // Asignar el enlace de compra
+
+        productDetail.style.display = 'block'; // Mostrar la sección de detalles
+    }
+
+    function hideProductDetail() {
+        productDetail.style.display = 'none'; // Ocultar la sección de detalles
+    }
+</script>
+
+
+</body>
+</html>
